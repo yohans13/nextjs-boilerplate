@@ -26,15 +26,25 @@ export const initGlobalStore = (): DefaultGlobalStoreState => {
     };
 };
 
+// export const createGlobalStore = (initState: DefaultGlobalStoreState) => {
+//     return createStore<GlobalStore>()(persist((set, get, store) => ({
+//         ...initState,
+//         // all slices
+//         ...createAppManagementSlice(set, get, store),
+//         ...createQuotationManagementSlice(set, get, store),
+//     }), {
+//         name: 'globalStore',
+//         storage: createJSONStorage(() => localStorage), // (optional) by default, 'localStorage' is used - other option is "sessionStorage"
+//         //skipHydration: true,
+//     }));
+// };
+
+
 export const createGlobalStore = (initState: DefaultGlobalStoreState) => {
-    return createStore<GlobalStore>()(persist((set, get, store) => ({
+    return createStore<GlobalStore>()((set, get, store) => ({
         ...initState,
         // all slices
         ...createAppManagementSlice(set, get, store),
         ...createQuotationManagementSlice(set, get, store),
-    }), {
-        name: 'globalStore',
-        storage: createJSONStorage(() => localStorage), // (optional) by default, 'localStorage' is used - other option is "sessionStorage"
-        //skipHydration: true,
     }));
 };
